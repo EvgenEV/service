@@ -16,5 +16,8 @@ namespace app\controllers;
 
 class MainController extends \ejfw\core\Controller
 {
-    //put your code here
+    public function actionIndex() 
+    {
+        echo 'Главная страница';
+    }
 }

@@ -9,7 +9,6 @@
             <file>file:/var/www/service.loc/vendor/ejfw/core/Loader.php</file>
             <file>file:/var/www/service.loc/vendor/ejfw/core/Router.php</file>
             <file>file:/var/www/service.loc/www/index.php</file>
-            <file>file:/var/www/service.loc/vendor/ejfw/core/Controller.php</file>
         </group>
     </open-files>
 </project-private>

@@ -20,7 +20,8 @@ class ProductsController extends \ejfw\core\Controller
     }
     
     public function actionView() {
-        echo 'Страница товара';
+        echo 'Страница товара <br />';
+        var_dump($arr =  func_get_args());
     }
     
     public function actionCategory() {

@@ -32,7 +32,7 @@ class Router {
             //Декодируем символы
             $str = urldecode($str);
             //Убираем слэши в начале и конце
-            $str = trim($str, '/');
+            //$str = trim($str, '/');
 
             return $str;
         }
@@ -51,11 +51,20 @@ class Router {
                 $actionName = 'action' . ucfirst($action['action']);
                 
                 //ПАРАМЕТРЫ
-                $parameters = array();
+                //Если в массиве $matches больше одного элемента
+                //(Т.е. в строке URI присутствуют параметры)
+                if (isset($matches[1]))
+                {
+                    //Удаляем первый элемент массива, которы содержит полную 
+                    //строку совпалдения с правилом маршрутизации
+                    unset($matches[0]);
+                    //Присваиваем новые ключи
+                    sort($matches);
+                }
                 //Создаем объект-контроллер
                 $controllerObject = new $className;
                 //Вызываем нужный медод - экшн
-                call_user_func_array([$controllerObject, $actionName], $parameters);
+                call_user_func_array([$controllerObject, $actionName], $matches);
                 $result = true;
                 //Прерываем перебор массива правил маршрутизации
                 break;
@@ -64,7 +73,11 @@ class Router {
         
         //Если совпадения не найдены
         if ($result == null) {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+            header('Content-type: text/html; charset=UTF-8');
             echo 'Ошибка: Страница не найдена!';
+            exit;
+
         }
     }
 
